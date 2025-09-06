@@ -68,9 +68,9 @@ This project is written in a **modular style** — each file has a clear respons
 
 ## 🔹 Features of the App
 
-✔️ Upload any dataset and train a perceptron model
-✔️ Automatic preprocessing (cleaning, encoding, splitting)
-✔️ Adjustable hyperparameters (iterations, learning rate)
-✔️ Hyperparameter search for optimal settings
-✔️ Visual analysis (confusion matrix, ROC curve, feature importance)
-✔️ Easy-to-use **web interface with Streamlit**
+* ✔️ Upload any dataset and train a perceptron model
+* ✔️ Automatic preprocessing (cleaning, encoding, splitting)
+* ✔️ Adjustable hyperparameters (iterations, learning rate)
+* ✔️ Hyperparameter search for optimal settings
+* ✔️ Visual analysis (confusion matrix, ROC curve, feature importance)
+* ✔️ Easy-to-use **web interface with Streamlit**
