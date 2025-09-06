@@ -78,8 +78,9 @@ if st.button("Train Model"):
     fig = plot_confusion_matrix(y_test, y_pred)
     st.pyplot(fig)
 
-    # Optional hyperparameter tuning
-    if st.button("Run Hyperparameter Search"):
-        best_params, best_score = run_hyperparameter_search(X_train, y_train)
-        st.write("Best Params:", best_params)
-        st.write("Best Score:", best_score)
+# === Hyperparameter Search Button ===
+if st.button("Run Hyperparameter Search"):
+    best_params, best_score = run_hyperparameter_search(X_train, y_train)
+    st.write("### Hyperparameter Search Results")
+    st.write("Best Params:", best_params)
+    st.write("Best Score:", best_score)
