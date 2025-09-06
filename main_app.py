@@ -7,7 +7,7 @@ from data_cleaner import clean_data
 from train_test_split import prepare_features_target, split_data 
 from perceptron import create_perceptron, train_model 
 from model_evaluation import evaluate_model 
-from visualization import plot_confusion_matrix 
+from visualization import plot_confusion_matrix, plot_roc_curve, plot_precision_recall_curve, plot_feature_importance
 from hyperparameter_tuning import run_hyperparameter_search 
 import matplotlib.pyplot as plt 
 
@@ -56,6 +56,9 @@ if df[target_column].dtype == object:
 # Features are all except target
 X, y = prepare_features_target(df, target_column=target_column)
 
+# Save feature names for visualization later
+feature_names = df.drop(columns=[target_column]).columns.tolist()
+
 # === Train/test split ===
 X_train, X_test, y_train, y_test = split_data(X, y)
 
@@ -70,13 +73,23 @@ if st.button("Train Model"):
     model = train_model(model, X_train, y_train)
 
     # Evaluate
-    acc, report, y_pred = evaluate_model(model, X_test, y_test)
+    acc, report, y_pred, metrics = evaluate_model(model, X_test, y_test)
     st.write(f"### Accuracy: {acc:.2f}")
+    st.write("### Precision:", metrics["precision"])
+    st.write("### Recall:", metrics["recall"])
+    st.write("### F1 Score:", metrics["f1"])
     st.write("### Classification Report", report)
 
     # Visualization
-    fig = plot_confusion_matrix(y_test, y_pred)
-    st.pyplot(fig)
+    st.pyplot(plot_confusion_matrix(y_test, y_pred))
+    st.pyplot(plot_roc_curve(model, X_test, y_test))
+    st.pyplot(plot_precision_recall_curve(model, X_test, y_test))
+
+    # Feature importance (if applicable)
+    fig_importance = plot_feature_importance(model, feature_names)
+    if fig_importance:
+        st.pyplot(fig_importance)
+
 
 # === Hyperparameter Search Button ===
 if st.button("Run Hyperparameter Search"):
@@ -84,3 +97,29 @@ if st.button("Run Hyperparameter Search"):
     st.write("### Hyperparameter Search Results")
     st.write("Best Params:", best_params)
     st.write("Best Score:", best_score)
+
+    # Retrain model with best hyperparameters
+    model = create_perceptron(
+        max_iter=best_params.get("max_iter", max_iter),
+        eta0=best_params.get("eta0", eta0)
+    )
+    model = train_model(model, X_train, y_train)
+
+    # Evaluate tuned model
+    st.write("Results With Tuned Parameters")
+    acc, report, y_pred, metrics = evaluate_model(model, X_test, y_test)
+    st.write(f"### Accuracy: {acc:.2f}")
+    st.write("### Precision:", metrics["precision"])
+    st.write("### Recall:", metrics["recall"])
+    st.write("### F1 Score:", metrics["f1"])
+    st.write("### Classification Report", report)
+
+    # Visualization
+    st.pyplot(plot_confusion_matrix(y_test, y_pred))
+    st.pyplot(plot_roc_curve(model, X_test, y_test))
+    st.pyplot(plot_precision_recall_curve(model, X_test, y_test))
+
+    # Feature importance (if applicable)
+    fig_importance = plot_feature_importance(model, feature_names)
+    if fig_importance:
+        st.pyplot(fig_importance)
