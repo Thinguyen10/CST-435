@@ -74,3 +74,25 @@ This project is written in a **modular style** — each file has a clear respons
 * ✔️ Hyperparameter search for optimal settings
 * ✔️ Visual analysis (confusion matrix, ROC curve, feature importance)
 * ✔️ Easy-to-use **web interface with Streamlit**
+
+Great question 👍 — for a GitHub README, citations should go in a **dedicated section at the end** so they don’t clutter your project explanation but are still visible and properly credit the dataset authors.
+
+I’d suggest adding a **“📖 References / Citation”** section after your existing content. Example:
+
+---
+
+## 📖 References
+
+**Dataset**
+
+* Rice (Cammeo and Osmancik) Dataset
+
+  * Source: [Murat Koklu Datasets](https://www.muratkoklu.com/datasets/) | [UCI Repository](https://archive.ics.uci.edu/dataset/545/rice+cammeo+and+osmancik)
+  * Authors:
+
+    * İlKay Cinar (Selcuk University, Konya, Turkey)
+    * Murat Koklu (Selcuk University, Konya, Turkey)
+  * Abstract: 3810 rice grains were imaged and 7 morphological features were extracted for classification.
+
+**Citation**
+Cinar, I. and Koklu, M. (2019). *Classification of Rice Varieties Using Artificial Intelligence Methods.* International Journal of Intelligent Systems and Applications in Engineering, vol.7, no.3 (Sep. 2019), pp.188–194. [https://doi.org/10.18201/ijisae.2019355381](https://doi.org/10.18201/ijisae.2019355381)
