@@ -1,0 +1,35 @@
+# ignore macOS system files
+.DS_Store
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Streamlit cache and logs
+.streamlit/
+.streamlit/logs/
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+
+# Temporary files
+*.log
+*.tmp
